@@ -1,26 +1,112 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --ps5-bg: #121212;
+    --ps5-accent: #00c2ff;
+    --ps5-orange: #ff4500;
+    --ps5-secundary-color: #1e1e1e;
+    --ps5-text: #f8f9fa;
+    --ps5-card: #ffffff0d;
+    --ps5-accent-glow: #00c2ff1a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--ps5-bg);
+    color: var(--ps5-text);
+    margin: 0;
+    overflow: hidden;
+}
+
+.font-bebas {
+    font-family: var(--font-bebas), sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.font-mono {
+    font-family: var(--font-jetbrains), monospace;
+}
+
+.ps5-secundary-color {
+    color: var(--ps5-secundary-color);
+}
+
+.ps5-text {
+    color: var(--ps5-text);
+}
+
+.ps5-orange {
+    color: var(--ps5-orange);
+}
+
+.ps5-glow {
+    color: var(--ps5-accent-glow);
+}
+
+.ps5-welcome {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.ps5-welcome::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa05;
+
+    mask-image: url("/img/PS5-bg.svg");
+    mask-size: 60px 60px;
+    mask-repeat: repeat;
+
+    z-index: 1;
+}
+
+.ps5-welcome::after {
+    content: "";
+    position: absolute;
+
+    top: 24px;
+    right: 24px;
+    width: 50vw;
+    height: 50vh;
+
+    background: radial-gradient(
+        circle at top right,
+        #00c3ff1f 0%,
+        #00c2ff0a 40%,
+        transparent 80%
+    );
+
+    filter: blur(60px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ps5-safe-area {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    padding: 24px;
 }
