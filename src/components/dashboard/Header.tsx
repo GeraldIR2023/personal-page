@@ -1,8 +1,18 @@
 "use client";
 import Image from "next/image";
 import { Clock } from "./Clock";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
+    const pathName = usePathname();
+
+    const getPage = () => {
+        if (pathName.includes("/library")) return "Library";
+        if (pathName.includes("/profile")) return "Profile";
+        if (pathName.includes("/experience")) return "Experience";
+        return "Gerald Corrales";
+    };
+
     return (
         <header className="w-full relative z-50">
             <div className="flex justify-between items-center px-2 py-1">
@@ -16,7 +26,7 @@ export const Header = () => {
                     />
 
                     <h1 className="font-bebas text-2xl tracking-widest text-[#F8F9FA] uppercase opacity-90">
-                        Gerald Corrales
+                        {getPage()}
                     </h1>
                 </div>
 

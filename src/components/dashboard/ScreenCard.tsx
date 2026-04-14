@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface ScreenCardProps {
     id: string;
@@ -22,9 +23,18 @@ export const ScreenCard = ({
     isFocused,
     onHover,
 }: ScreenCardProps) => {
+    const router = useRouter();
+
+    const handleNavigation = () => {
+        if (id === "library") {
+            router.push("/library");
+        }
+    };
+
     return (
         <motion.div
             layout
+            onClick={handleNavigation}
             className="relative flex items-start shrink-0"
             onMouseEnter={() => onHover(id)}
             style={{
@@ -68,7 +78,6 @@ export const ScreenCard = ({
                     />
                 </div>
             </motion.div>
-
             <AnimatePresence mode="wait">
                 {isFocused && (
                     <motion.div

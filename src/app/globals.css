@@ -56,6 +56,10 @@ body {
     color: var(--ps5-accent-glow);
 }
 
+.ps5-card {
+    background: var(--ps5-card);
+}
+
 .ps5-welcome {
     position: fixed;
     top: 0;

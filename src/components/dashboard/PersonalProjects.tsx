@@ -127,7 +127,6 @@ export const PersonalProjects = () => {
                             <Trophies color="#FFD700" count="4" />
                             <Trophies color="#C0C0C0" count="4" />
                             <Trophies color="#CD7F32" count="3" />
-                            {/* Bronce */}
                         </div>
 
                         <div className="w-full space-y-1.5">
