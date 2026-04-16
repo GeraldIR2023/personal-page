@@ -1,17 +1,28 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Star } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 import { checkpointLogs } from "@/constants/projects/checkpoint";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Header } from "@/components/dashboard/Header";
 import { TrophyStat } from "@/components/library/TrophyStat";
 import { TrophyCard } from "@/components/library/TrophyCard";
+import { projectsData } from "@/constants/projects/projects";
+import { useState } from "react";
+import { TrophyDetailModal } from "@/components/dashboard/TrophyDetailModal";
 
 const mainBoxShadow = "0px 20px 50px rgba(0, 0, 0, 0.7)";
 
 export default function ProjectPage() {
     const router = useRouter();
+    const params = useParams();
+
+    //*Check if project exists
+    const projectId = params.projectId as string;
+    const project = projectsData[projectId];
+
+    if (!project) return null;
+
+    const [selectedTrophy, setSelectedTrophy] = useState<any>(null);
 
     const principalTrophy = checkpointLogs[0];
     const secondaryTrophies = checkpointLogs.slice(1);
@@ -37,7 +48,7 @@ export default function ProjectPage() {
                 >
                     {/*Title*/}
                     <h1 className="font-bebas text-4xl tracking-tighter text-[#F8F9FA] uppercase mb-8">
-                        CheckPoint | VIDEO GAME E-COMMERCE
+                        {project.title}
                     </h1>
                     {/*Description*/}
                     <section className="ps5-card p-6 rounded-sm border border-white/5 mb-10">
@@ -45,19 +56,7 @@ export default function ProjectPage() {
                             Project Description:
                         </h3>
                         <p className="text-gray-400 text-sm leading-relaxed font-sans opacity-90">
-                            A fully custom e-commerce platform inspired by the
-                            classic Crash Bandicoot aesthetic. Moving beyond
-                            tutorial-based learning, I engineered this project
-                            from scratch to tackle real-world challenges in
-                            digital commerce.
-                        </p>
-                        <p className="text-gray-400 text-sm leading-relaxed font-sans opacity-90">
-                            I focused on creating a seamless user
-                            experience—from a dynamic product catalog to a
-                            functional shopping cart—while maintaining a
-                            cohesive, nostalgic visual identity. This project
-                            represents a year of self-directed growth, mastering
-                            state management and database integrity.
+                            {project.description}
                         </p>
                     </section>
 
@@ -65,7 +64,7 @@ export default function ProjectPage() {
                     <section>
                         <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
                             <h2 className="font-bebas text-2xl tracking-widest text-white uppercase">
-                                Trophy Room: Project Checkpoint
+                                Trophy Room: {projectId}
                             </h2>
                             {/*Stats*/}
                             <div className="flex gap-4 items-center bg-[#161616] px-4 py-2 rounded-full border border-white/5">
@@ -79,9 +78,11 @@ export default function ProjectPage() {
                         <div className="flex flex-col gap-4">
                             {/*Principal Trophy*/}
                             <TrophyCard
-                                trophy={principalTrophy}
-                                router={router}
+                                trophy={project.logs[0]}
                                 isMaster={true}
+                                onOpen={() =>
+                                    setSelectedTrophy(project.logs[0])
+                                }
                             />
                             {/*Secondary Trophies*/}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -89,11 +90,19 @@ export default function ProjectPage() {
                                     <TrophyCard
                                         key={trophy.id}
                                         trophy={trophy}
-                                        router={router}
-                                        index={index}
+                                        onOpen={() => setSelectedTrophy(trophy)}
                                     />
                                 ))}
                             </div>
+                            {/*Modal*/}
+                            <AnimatePresence>
+                                {selectedTrophy && (
+                                    <TrophyDetailModal
+                                        trophy={selectedTrophy}
+                                        onClose={() => setSelectedTrophy(null)}
+                                    />
+                                )}
+                            </AnimatePresence>
                         </div>
                     </section>
                 </motion.div>

@@ -3,12 +3,24 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
-export const TrophyCard = ({ trophy, router, isMaster, index = 0 }: any) => (
+interface TrophyCardProps {
+    trophy: any;
+    isMaster?: boolean;
+    index?: number;
+    onOpen: (trophy: any) => void;
+}
+
+export const TrophyCard = ({
+    trophy,
+    isMaster,
+    index = 0,
+    onOpen,
+}: TrophyCardProps) => (
     <motion.div
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: isMaster ? 0.2 : 0.3 + index * 0.05 }}
-        onClick={() => router.push(`/library/checkpoint/${trophy.id}`)}
+        onClick={() => onOpen(trophy)}
         className={`
             group flex items-center justify-between bg-[#121212] p-5 rounded-sm border 
             transition-all duration-300 cursor-pointer
