@@ -30,6 +30,8 @@ export const ScreenCard = ({
             router.push("/library");
         } else if (id === "profile") {
             router.push("/profile");
+        } else if (id === "experience") {
+            router.push("/experience");
         }
     };
 

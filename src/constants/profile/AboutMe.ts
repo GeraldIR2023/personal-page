@@ -25,11 +25,12 @@ export const profileContent = {
     audio: [
         { label: "Sleep Token", value: "Look To Windward" },
         { label: "Metallica", value: "One" },
-        { label: "RHCP", value: "Lately" },
+        { label: "Red Hot CHili Peppers", value: "Lately" },
         { label: "R.E.M", value: "Electrolite" },
-        { label: "QOTSA", value: "My God Is The Sun" },
+        { label: "Queens Of The Stone Age", value: "My God Is The Sun" },
         { label: "Ghost", value: "Lachryma" },
         { label: "Tool", value: "Lateralus" },
+        { label: "Pearl Jam", value: "Scare To Fear" },
     ],
     maintenance: [
         { label: "Favorite Food", value: "Burguers" },
