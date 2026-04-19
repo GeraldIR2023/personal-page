@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Clock } from "./Clock";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export const Header = () => {
     const pathName = usePathname();
@@ -16,19 +17,23 @@ export const Header = () => {
     return (
         <header className="w-full relative z-50">
             <div className="flex justify-between items-center px-2 py-1">
-                <div className="flex items-center gap-4">
-                    <Image
-                        src="/img/Logo.png"
-                        alt="Logo"
-                        width={32} //TODO: Adjust text
-                        height={32}
-                        className="object-contain"
-                    />
-
-                    <h1 className="font-bebas text-2xl tracking-widest text-[#F8F9FA] uppercase opacity-90">
-                        {getPage()}
-                    </h1>
-                </div>
+                <Link
+                    href="/home"
+                    className="flex items-center gap-4 group cursor-pointer transition-transform active:scale-95"
+                >
+                    <div className="flex items-center gap-4">
+                        <Image
+                            src="/img/Logo.png"
+                            alt="Logo"
+                            width={32} //TODO: Adjust text
+                            height={32}
+                            className="object-contain"
+                        />
+                        <h1 className="font-bebas text-2xl tracking-widest text-[#F8F9FA] uppercase opacity-90">
+                            {getPage()}
+                        </h1>
+                    </div>
+                </Link>
 
                 <div className="font-mono text-xl tracking-tighter text-[#F8F9FA]/80">
                     <Clock />

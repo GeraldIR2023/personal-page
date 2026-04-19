@@ -28,6 +28,8 @@ export const ScreenCard = ({
     const handleNavigation = () => {
         if (id === "library") {
             router.push("/library");
+        } else if (id === "profile") {
+            router.push("/profile");
         }
     };
 
